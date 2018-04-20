@@ -19,12 +19,12 @@ $(document).ready(function(){
           var month = $('#months').children('.mese:selected').val();
 
           var year = $('#years').children('.year:selected').val();
-          var now=moment(year, month);
+          //var now=moment(year, month);
 
 
 
           var country = $('#countries').val();
-          var numdays=moment().daysInMonth("parseInt(year)-parseInt(month)", "YYYY-MM");
+          var numdays=moment('year-month', "YYYY-MM").daysInMonth();
           console.log("numdays", numdays);
 
       $.ajax({
