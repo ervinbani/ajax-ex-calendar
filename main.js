@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 
           var country = $('#countries').val();
-          var numdays=moment('year-month', "YYYY-MM").daysInMonth();
+          var numdays=moment(year + '-' + month).daysInMonth();
           console.log("numdays", numdays);
 
       $.ajax({
@@ -37,7 +37,7 @@ $(document).ready(function(){
               year: year
           },
           success:function(data){
-            for (var i = 0; i < 30; i++) {
+            for (var i = 1; i < (numdays+1); i++) {
               $('.container').append("<p>"+i+$('#months').children('.mese:selected').text()+"</p>");
 
             }
