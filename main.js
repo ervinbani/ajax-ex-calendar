@@ -1,15 +1,18 @@
+
 $(document).ready(function(){
+
       //click sul bottone cerca
      $(document).on('click', $('#btn'), function(){
-          var month = $('#months').children('.mese:selected').val();
-          var correntmonth=$('#months').children('.mese:selected').attr('id');
-          console.log("correntmonth", correntmonth);
-          var year = $('#years').children('.year:selected').val();
-          //var now=moment(year, month);
+       $('.btndivs').show();
+       var month = $('#months').children('.mese:selected').val();
+       var correntmonth=$('#months').children('.mese:selected').attr('id');
+       console.log("correntmonth", correntmonth);
+       var year = $('#years').children('.year:selected').val();
+       //var now=moment(year, month);
 
-          var country = $('#countries').val();
-          var numdays=moment(year + '-' + correntmonth).daysInMonth();
-          console.log("numdays", numdays);
+       var country = $('#countries').val();
+       var numdays=moment(year + '-' + correntmonth).daysInMonth();
+
 
       $.ajax({
           url: 'https://holidayapi.com/v1/holidays',
@@ -21,13 +24,17 @@ $(document).ready(function(){
               year: year
           },
           success:function(data){
+            $('.container').children('.monthContainer').children('p').remove();
+            console.log("numdays", numdays);
+            for (var i = 1; i < (numdays+1); i++) {
+                $('.container').children('.monthContainer').append("<p id="+i+">"+i+" "+ $('#months').children('.mese:selected').text()+"</p>");
+            }
               console.log(data);
               arrHoliday=[];
               namesHoliday=[];
-              for (var i = 1; i < (numdays+1); i++) {
-                  //$('.container').children('.monthContainer').append("<p id="+i+">"+i+$('#months').children('.mese:selected').text()+"</p>");
-                  $('.container').children('.monthContainer').append("<p id="+i+">"+i+" "+ $('#months').children('.mese:selected').text()+"</p>");
-
+              /*for (var i = 1; i < (numdays+1); i++) {
+                  $('.container').children('.monthContainer').childrens('p').text(i+" "+ $('#months').children('.mese:selected').text());
+              }*/
               for(var j = 0; j < data.holidays.length; j++){
                   var dateOfHoliday = moment(data.holidays[j]['date']);
                   arrHoliday.push(dateOfHoliday.format('D MMMM'));
@@ -39,13 +46,9 @@ $(document).ready(function(){
 
                       if(arrHoliday.includes(correntDay.text())){
                           correntDay.addClass('colorRed');
-                          correntDay.text(correntDay.text());
-
+                          //correntDay.text(correntDay.text());
                       }
                   });
-
-              }
-
 
               }
               console.log("arrHoliday", arrHoliday);
