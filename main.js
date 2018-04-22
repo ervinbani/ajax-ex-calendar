@@ -27,16 +27,30 @@ $(document).ready(function(){
             $('.container').children('.monthContainer').children('.cell').remove();
 
             console.log("numdays", numdays);
+            var dayOfWeek=[];
             for (var i = 1; i < (numdays+1); i++) {
-                $('.container').children('.monthContainer').append("<div class=cell id="+i+" >"+i+" "+ $('#months').children('.mese:selected').text()+"</div>");
+                if(i<10){
+                    var giorno=moment(year+'-'+month+'-'+'0'+i);
+                    var giornosett=giorno.format('dddd');
+                    dayOfWeek.push(giornosett);
+                }
+                else{
+                  var giorno=moment(year+'-'+month+'-'+i);
+                  var giornosett=giorno.format('dddd');
+                  dayOfWeek.push(giornosett);
+                }
+
+
+                $('.container').children('.monthContainer').append("<div class=cell id="+i+" >"+i+" "+ $('#months').children('.mese:selected').text()+'<br>'+dayOfWeek[i-1]+"</div>");
             }
               console.log(data);
               arrHoliday=[];
               namesHoliday=[];
-              /*for (var i = 1; i < (numdays+1); i++) {
-                  $('.container').children('.monthContainer').childrens('p').text(i+" "+ $('#months').children('.mese:selected').text());
-              }*/
+              var c=0;
+
+
               for(var j = 0; j < data.holidays.length; j++){
+
                   var dateOfHoliday = moment(data.holidays[j]['date']);
                   arrHoliday.push(dateOfHoliday.format('D MMMM'));
                   namesHoliday.push(nameOfHoliday)
@@ -44,9 +58,11 @@ $(document).ready(function(){
                   thisDay=$('.monthContainer').children('.cell');
                   thisDay.each(function(){
                       correntDay=$(this);
+                    //  arrHoliday.includes(correntDay.text())
 
-                      if(arrHoliday.includes(correntDay.text())){
+                      if(correntDay.text().includes(arrHoliday)){
                           correntDay.addClass('colorRed');
+                          correntDay.text();
                           //correntDay.text(correntDay.text());
                       }
                   });
