@@ -5,8 +5,8 @@
 .container{
   margin:auto;
   text-align: center;
-  width: 500px;
-  height: 900px;
+  width: 510px;
+  height: auto;
   border:5px solid lightgrey;
 }
 .colorRed{
@@ -14,4 +14,17 @@
 }
 .btndivs{
   display: none;
+}
+.monthContainer{
+  width: 510px;
+  height:auto;
+}
+.cell{
+  border:1px solid lightgrey;
+  width: 100px;
+  height:100px;
+  float:left;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
