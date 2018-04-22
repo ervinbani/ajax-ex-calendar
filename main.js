@@ -29,19 +29,19 @@ $(document).ready(function(){
             console.log("numdays", numdays);
             var dayOfWeek=[];
             for (var i = 1; i < (numdays+1); i++) {
-                if(i<10){
-                    var giorno=moment(year+'-'+month+'-'+'0'+i);
-                    var giornosett=giorno.format('dddd');
-                    dayOfWeek.push(giornosett);
-                }
-                else{
+                //if(i<10){
+                    //var giorno=moment(year+'-'+month+'-'+'0'+i);
+                    //var giornosett=giorno.format('dddd');
+                    //dayOfWeek.push(giornosett);
+                //}
+                //else{
                   var giorno=moment(year+'-'+month+'-'+i);
                   var giornosett=giorno.format('dddd');
                   dayOfWeek.push(giornosett);
-                }
+                //}
 
 
-                $('.container').children('.monthContainer').append("<div class=cell id="+i+" >"+i+" "+ $('#months').children('.mese:selected').text()+'<br>'+dayOfWeek[i-1]+"</div>");
+                $('.container').children('.monthContainer').append("<div class=cell id="+i+" >"+'<p>'+i+" "+ $('#months').children('.mese:selected').text()+'</p>'+'<br>'+dayOfWeek[i-1]+"</div>");
             }
               console.log(data);
               arrHoliday=[];
@@ -55,19 +55,26 @@ $(document).ready(function(){
                   arrHoliday.push(dateOfHoliday.format('D MMMM'));
                   namesHoliday.push(nameOfHoliday)
                   var nameOfHoliday = data.holidays[j]['name'];
-                  thisDay=$('.monthContainer').children('.cell');
+                    }
+                  thisDay=$('.monthContainer').children('.cell').children('p');
+
                   thisDay.each(function(){
                       correntDay=$(this);
-                    //  arrHoliday.includes(correntDay.text())
+                    //                    correntDay.text().includes(arrHoliday[i])
 
-                      if(correntDay.text().includes(arrHoliday)){
-                          correntDay.addClass('colorRed');
+                    for(var i=0;i<arrHoliday.length;i++){
+
+
+
+                      if(arrHoliday.includes(correntDay.text())){
+                          correntDay.parent().addClass('colorRed');
                           correntDay.text();
                           //correntDay.text(correntDay.text());
                       }
+                      }
                   });
 
-              }
+
               console.log("arrHoliday", arrHoliday);
               console.log("namesHoliday", namesHoliday);
               console.log('selettore', $('.mese:selected').val());
