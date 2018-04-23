@@ -15,14 +15,26 @@ $(document).ready(function(){
         //pulsante che porta al mese successivo
         $('#btn3').click(function(){
             month=parseInt(month)+1;
-            console.log('month', month);
-            newmonth();
+            if((0<month)&&(month<13)){
+                newmonth();
+            }
+            else if(month>12){
+                month=1;
+                year=parseInt(year)+1;
+                newmonth();
+            }
         });
 
         $('#btn2').click(function(){
             month=parseInt(month)-1;
-            newmonth();
-
+            if((1<month)&&(month<13)){
+                newmonth();
+            }
+            else if(month<1){
+                month=12;
+                year=parseInt(year)-1;
+                newmonth();
+            }
         });
 
   });
