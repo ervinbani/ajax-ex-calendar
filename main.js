@@ -15,30 +15,30 @@ $(document).ready(function(){
         //pulsante che porta al mese successivo
         $('#btn3').click(function(){
             month=parseInt(month)+1;
-            if((0<month)&&(month<13)){
+            if((0<month)&&(month<13)){//controllo se il numero del mese sia fra 1e 12
                 newmonth();
             }
-            else if(month>12){
+            else if(month>12){//se il numero del mese e' maggiore di 12, setto il val month=1
                 month=1;
-                year=parseInt(year)+1;
+                year=parseInt(year)+1;//e il valore dell'anno aumenta di 1 per passare da dic a gennaio
                 newmonth();
             }
         });
-
+        //attivo il pulsante per andare nei mesi preccedeti
         $('#btn2').click(function(){
             month=parseInt(month)-1;
-            if((1<month)&&(month<13)){
+            if((1<month)&&(month<13)){//se il month ha un num fra 1 e 12, genero il mese precceddente
                 newmonth();
             }
-            else if(month<1){
+            else if(month<1){//se month-1 ha un val<1, setto month=12, e decremento di 1 il vall di year
                 month=12;
-                year=parseInt(year)-1;
+                year=parseInt(year)-1;//decremento di 1 il vall di year per passare a dicembre dell'anno precedente
                 newmonth();
             }
         });
 
   });
-  //ISTRUZIONI PER ATTIVARE IL BOTTONE AVANTI
+  //Funzione che genera un mese al click
 function newmonth(){
 $.ajax({
     url: 'https://holidayapi.com/v1/holidays',
