@@ -5,7 +5,7 @@
 .container{
   margin:auto;
   text-align: center;
-  width: 510px;
+  width: 620px;
   height: auto;
   border:5px solid lightgrey;
 }
@@ -14,13 +14,13 @@
   display: none;
 }
 .monthContainer{
-  width: 510px;
+  width: 620px;
   height:auto;
 }
 .cell{
   border:1px solid lightgrey;
-  width: 100px;
-  height:100px;
+  width: 120px;
+  height:120px;
   float:left;
   text-align: center;
   padding-top: 10px;

@@ -53,8 +53,8 @@ $(document).ready(function(){
 
                   var dateOfHoliday = moment(data.holidays[j]['date']);
                   arrHoliday.push(dateOfHoliday.format('D MMMM'));
-                  namesHoliday.push(nameOfHoliday)
                   var nameOfHoliday = data.holidays[j]['name'];
+                  namesHoliday.push(nameOfHoliday)
                     }
                   thisDay=$('.monthContainer').children('.cell').children('p');
 
@@ -65,9 +65,10 @@ $(document).ready(function(){
 
                         if(arrHoliday.includes(correntDay.text())){
                             correntDay.parent().addClass('colorRed');
-                          
 
-                            //correntDay.text(correntDay.text());
+
+                            correntDay.text(correntDay.text()+'-'+namesHoliday[c].toUpperCase());
+                            c++;
                         }
                       }
                   });
