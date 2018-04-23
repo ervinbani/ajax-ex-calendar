@@ -9,9 +9,7 @@
   height: auto;
   border:5px solid lightgrey;
 }
-.colorRed{
-  color:red;
-}
+
 .btndivs{
   display: none;
 }
@@ -26,4 +24,17 @@
   float:left;
   text-align: center;
   padding-top: 10px;
+
+}
+.cell:hover{
+  background: lightgrey;
+  color:white;
+  font-size: 20px;
+
+}
+.colorRed{
+  color:red;
+}
+.colorRed:hover{
+  color: red;
 }

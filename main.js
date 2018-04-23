@@ -2,7 +2,7 @@
 $(document).ready(function(){
 
       //click sul bottone cerca
-     $(document).on('click', $('#btn'), function(){
+     $(document).on('click', '#btn', function(){
        $('.btndivs').show();
        var month = $('#months').children('.mese:selected').val();
        var correntmonth=$('#months').children('.mese:selected').attr('id');
@@ -60,17 +60,15 @@ $(document).ready(function(){
 
                   thisDay.each(function(){
                       correntDay=$(this);
-                    //                    correntDay.text().includes(arrHoliday[i])
 
                     for(var i=0;i<arrHoliday.length;i++){
 
+                        if(arrHoliday.includes(correntDay.text())){
+                            correntDay.parent().addClass('colorRed');
+                          
 
-
-                      if(arrHoliday.includes(correntDay.text())){
-                          correntDay.parent().addClass('colorRed');
-                          correntDay.text();
-                          //correntDay.text(correntDay.text());
-                      }
+                            //correntDay.text(correntDay.text());
+                        }
                       }
                   });
 
