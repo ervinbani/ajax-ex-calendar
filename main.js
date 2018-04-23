@@ -9,7 +9,7 @@ $(document).ready(function(){
   var country = $('#countries').val();
   var numdays=moment(year + '-' + correntmonth).daysInMonth();
       //click sul bottone cerca
-     $(document).on('click', $('#btn'), function(){
+     $(document).on('click', '#btn', function(){
         $('.btndivs').show();
             newmonth();
         //pulsante che porta al mese successivo
