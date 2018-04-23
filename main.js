@@ -12,10 +12,17 @@ $(document).ready(function(){
      $(document).on('click', $('#btn'), function(){
         $('.btndivs').show();
             newmonth();
+        //pulsante che porta al mese successivo
         $('#btn3').click(function(){
             month=parseInt(month)+1;
             console.log('month', month);
             newmonth();
+        });
+
+        $('#btn2').click(function(){
+            month=parseInt(month)-1;
+            newmonth();
+
         });
 
   });
