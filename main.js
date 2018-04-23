@@ -1,150 +1,89 @@
-var month = $('#months').children('.mese:selected').val();
-var correntmonth=$('#months').children('.mese:selected').attr('id');
-console.log("correntmonth", correntmonth);
-var year = $('#years').children('.year:selected').val();
-//var now=moment(year, month);
-
-var country = $('#countries').val();
-var numdays=moment(year + '-' + correntmonth).daysInMonth();
 
 
 $(document).ready(function(){
+  var month = $('#months').children('.mese:selected').val();
+  var correntmonth=$('#months').children('.mese:selected').attr('id');
+  console.log("correntmonth", correntmonth);
+  var year = $('#years').children('.year:selected').val();
 
+  var country = $('#countries').val();
+  var numdays=moment(year + '-' + correntmonth).daysInMonth();
       //click sul bottone cerca
-     $(document).on('click', '#btn', function(){
-       $('.btndivs').show();
+     $(document).on('click', $('#btn'), function(){
+        $('.btndivs').show();
+            newmonth();
+        $('#btn3').click(function(){
+            month=parseInt(month)+1;
+            console.log('month', month);
+            newmonth();
+        });
 
-
-      $.ajax({
-          url: 'https://holidayapi.com/v1/holidays',
-          method: 'GET',
-          data: {
-              key: '2c6965c6-0570-42d7-b76a-8e54095558ef',
-              country: country,
-              month: month,
-              year: year
-          },
-          success:function(data){
-            $('.container').children('.monthContainer').children('.cell').remove();
-
-            console.log("numdays", numdays);
-            var dayOfWeek=[];
-            for (var i = 1; i < (numdays+1); i++) {
-
-                  var giorno=moment(year+'-'+month+'-'+i);
-                  var giornosett=giorno.format('dddd');
-                  dayOfWeek.push(giornosett);
-                //}
-
-
-                $('.container').children('.monthContainer').append("<div class=cell id="+i+" >"+'<p>'+i+" "+ $('#months').children('.mese:selected').text()+'</p>'+'<br>'+dayOfWeek[i-1]+"</div>");
-            }
-              console.log(data);
-              arrHoliday=[];
-              namesHoliday=[];
-              var c=0;
-
-
-              for(var j = 0; j < data.holidays.length; j++){
-
-                  var dateOfHoliday = moment(data.holidays[j]['date']);
-                  arrHoliday.push(dateOfHoliday.format('D MMMM'));
-                  var nameOfHoliday = data.holidays[j]['name'];
-                  namesHoliday.push(nameOfHoliday);
-                    }
-                  thisDay=$('.monthContainer').children('.cell').children('p');
-
-                  thisDay.each(function(){
-                      correntDay=$(this);
-                      for(var i=0;i<arrHoliday.length;i++){
-                        if(arrHoliday.includes(correntDay.text())){
-                            correntDay.parent().addClass('colorRed');
-                            correntDay.text(correntDay.text()+'-'+namesHoliday[c].toUpperCase());
-                            c++;
-                        }
-                      }
-                  });
-
-
-              console.log("arrHoliday", arrHoliday);
-              console.log("namesHoliday", namesHoliday);
-              console.log('selettore', $('.mese:selected').val());
-
-      },//finisce il primo success
-      error:function(){
-
-          alert("errore");
-      }
-    });//qui finisce il prim ajax
-    nextmonth();
   });
   //ISTRUZIONI PER ATTIVARE IL BOTTONE AVANTI
-function nextmonth(){
-   $(document).on('click', '#btn3', function(){
+function newmonth(){
+$.ajax({
+    url: 'https://holidayapi.com/v1/holidays',
+    method: 'GET',
+    data: {
+        key: '2c6965c6-0570-42d7-b76a-8e54095558ef',
+        country: country,
+        month: parseInt(month),
+        year: year
+    },
+    success:function(data){
+      $('.container').children('.monthContainer').children('.cell').remove();
+      console.log("numdays", numdays);
+      var dayOfWeek=[];
+      for (var i = 1; i < (numdays+1); i++) {
 
-        $('.container').children('.monthContainer').children('.cell').remove();
+            var giorno=moment(year+'-'+month+'-'+i);
+            var giornosett=giorno.format('dddd');
+            var nomeMese=giorno.format('MMMM');
+            console.log('nome mese', nomeMese);
+            dayOfWeek.push(giornosett);
 
-        month=month+1;
-        /*if(month>12){
-            year++;
-            month=1;
-        }*/
 
-            $.ajax({
-                url: 'https://holidayapi.com/v1/holidays',
-                method: 'GET',
-                data: {
-                    key: '2c6965c6-0570-42d7-b76a-8e54095558ef',
-                    country: country,
-                    month: month,
-                    year: year
-                },
-                success:function(data){
-                  $('.container').children('.monthContainer').children('.cell').remove();
 
-                  var dayOfWeek=[];
-                  for (var i = 1; i < (numdays+1); i++) {
+          $('.container').children('.monthContainer').append("<div class=cell id="+i+" >"+'<p>'+i+" "+ nomeMese+'</p>'+'<br>'+dayOfWeek[i-1]+"</div>");
+      }
+        console.log(data);
+        arrHoliday=[];
+        namesHoliday=[];
+        var c=0;
+        for(var j = 0; j < data.holidays.length; j++){
 
-                        var giorno=moment(year+'-'+month+'-'+i);
-                        var giornosett=giorno.format('dddd');
-                        dayOfWeek.push(giornosett);
+            var dateOfHoliday = moment(data.holidays[j]['date']);
+            arrHoliday.push(dateOfHoliday.format('D MMMM'));
+            var nameOfHoliday = data.holidays[j]['name'];
+            namesHoliday.push(nameOfHoliday);
+              }
+            thisDay=$('.monthContainer').children('.cell').children('p');
 
+            thisDay.each(function(){
+                correntDay=$(this);
+                for(var i=0;i<arrHoliday.length;i++){
+                  if(arrHoliday.includes(correntDay.text())){
+                      correntDay.parent('.cell').addClass('colorRed');
+                      correntDay.text(correntDay.text()+'-'+namesHoliday[c].toUpperCase());
+                      c++;
                   }
-
-                  for (var i = 1; i < (numdays+1); i++) {
-                      $('.container').children('.monthContainer').append("<div class=cell id="+i+" >"+'<p>'+i+" "+ $('#months').children('.mese:selected').text()+'</p>'+'<br>'+dayOfWeek[i-1]+"</div>");
-                  }
-                    arrHoliday=[];
-                    namesHoliday=[];
-                    var c=0;
-                    for(var j = 0; j < data.holidays.length; j++){
-                        var dateOfHoliday = moment(data.holidays[j]['date']);
-                        arrHoliday.push(dateOfHoliday.format('D MMMM'));
-                        var nameOfHoliday = data.holidays[j]['name'];
-                        namesHoliday.push(nameOfHoliday)
-                        thisDay=$('.monthContainer').children('p');
-                        thisDay.each(function(){
-                            correntDay=$(this);
-                            if(arrHoliday.includes(correntDay.text())){
-                                correntDay.addClass('colorRed');
-                                correntDay.text(correntDay.text()+'-'+namesHoliday[c].toUpperCase());
-                                c++;
-                            }
-                        });
-
-                    }
-
-                },//fine secondo success
-                error:function(){
-
-                    alert("errore");
                 }
+            });
 
 
-              });//fine secondo ajax
+        console.log("arrHoliday", arrHoliday);
+        console.log("namesHoliday", namesHoliday);
+        console.log('selettore', $('.mese:selected').val());
 
-  });///fine click btn3
+},//finisce il primo success
+error:function(){
 
-}//fine funz nextmonth
+    alert("errore");
+}
+});//qui finisce il prim ajax
+
+}//fine della funzione
+
+
 
 });//fine dicument.ready
