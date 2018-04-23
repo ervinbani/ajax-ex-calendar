@@ -76,21 +76,13 @@ $.ajax({
                   }
                 }
             });
-
-
-        console.log("arrHoliday", arrHoliday);
-        console.log("namesHoliday", namesHoliday);
-        console.log('selettore', $('.mese:selected').val());
-
 },//finisce il primo success
 error:function(){
 
     alert("errore");
-}
-});//qui finisce il prim ajax
+  }
+  });//qui finisce il prim ajax
 
 }//fine della funzione
 
-
-
-});//fine dicument.ready
+  });//fine dicument.ready
