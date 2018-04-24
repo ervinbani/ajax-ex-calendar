@@ -1,5 +1,4 @@
 
-
 $(document).ready(function(){
   var month = $('#months').children('.mese:selected').val();
   var correntmonth=$('#months').children('.mese:selected').attr('id');
@@ -9,7 +8,8 @@ $(document).ready(function(){
   var country = $('#countries').val();
   var numdays=moment(year + '-' + correntmonth).daysInMonth();
       //click sul bottone cerca
-     $(document).on('click', '#btn', function(){
+     $('#btn').click(function(){
+       $('#months').children('.mese:selected').val('')
         $('.btndivs').show();
             newmonth();
         //pulsante che porta al mese successivo
@@ -61,8 +61,6 @@ $.ajax({
             console.log('nome mese', nomeMese);
             dayOfWeek.push(giornosett);
 
-
-
           $('.container').children('.monthContainer').append("<div class=cell id="+i+" >"+'<p>'+i+" "+ nomeMese+'</p>'+'<br>'+dayOfWeek[i-1]+"</div>");
       }
         console.log(data);
@@ -88,12 +86,12 @@ $.ajax({
                   }
                 }
             });
-},//finisce il primo success
+},//finisce success
 error:function(){
 
-    alert("errore");
+    alert("errore,con FREACCAUNT puoi generare i mesi fino a marzo 2018, altrimenti passa a premium");
   }
-  });//qui finisce il prim ajax
+  });//qui finisce il  ajax
 
 }//fine della funzione
 
