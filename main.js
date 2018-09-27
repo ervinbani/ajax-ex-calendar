@@ -61,7 +61,8 @@ $.ajax({
             console.log('nome mese', nomeMese);
             dayOfWeek.push(giornosett);
 
-          $('.container').children('.monthContainer').append("<div class=cell id="+i+" >"+'<p>'+i+" "+ nomeMese+'</p>'+'<br>'+dayOfWeek[i-1]+"</div>");
+          $('.container').children('.monthContainer').append("<div class=cell id="+i+" >"+'<p>'+
+                                                             i+" "+ nomeMese+'</p>'+'<br>'+dayOfWeek[i-1]+"</div>");
       }
         console.log(data);
         arrHoliday=[];
